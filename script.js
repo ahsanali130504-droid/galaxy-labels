@@ -161,3 +161,67 @@ machineModal.addEventListener('click', (e) => {
     machineModal.classList.remove('active');
   }
 });
+// ===== PRODUCT CATEGORY TABS =====
+const productImages = {
+  woven: [
+    { src: "images/sl1.jpg", alt: "Woven Label Design 1" },
+    { src: "images/sl3.avif", alt: "Woven Label Design 2" },
+    { src: "images/sli2.jpg", alt: "Woven Label Design 3" }
+  ],
+  badges: [
+    { src: "images/sli4.jpg", alt: "Woven Badge Design 1" },
+    { src: "images/sli5.jpg", alt: "Woven Badge Design 2" },
+    { src: "images/sl3.avif", alt: "Woven Badge Design 3" }
+  ],
+  lasercut: [
+    { src: "images/sl1.jpg", alt: "Laser Cut Label Design 1" },
+    { src: "images/sl3.avif", alt: "Laser Cut Label Design 2" },
+    { src: "images/sli2.jpg", alt: "Laser Cut Label Design 3" }
+  ],
+  damask: [
+    { src: "images/sl3.avif", alt: "Damask Label Design 1" },
+    { src: "images/sli4.jpg", alt: "Damask Label Design 2" },
+    { src: "images/sl1.jpg", alt: "Damask Label Design 3" }
+  ],
+  satin: [
+    { src: "images/sl3.avif", alt: "Satin Label Design 1" },
+    { src: "images/sli5.jpg", alt: "Satin Label Design 2" },
+    { src: "images/sli4.jpg", alt: "Satin Label Design 3" }
+  ],
+  taffeta: [
+    { src: "images/sli4.jpg", alt: "Taffeta Label Design 1" },
+    { src: "images/sli5.jpg", alt: "Taffeta Label Design 2" },
+    { src: "images/sl3.avif", alt: "Taffeta Label Design 3" }
+  ],
+  zipper: [
+    { src: "images/sli4.jpg", alt: "Zipper Puller Design 1" },
+    { src: "images/sli5.jpg", alt: "Zipper Puller Design 2" },
+    { src: "images/sl1.jpg", alt: "Zipper Puller Design 3" }
+  ],
+  hangtags: [
+    { src: "images/sli5.jpg", alt: "Hang Tag Design 1" },
+    { src: "images/sli4.jpg", alt: "Hang Tag Design 2" },
+    { src: "images/sl1.jpg", alt: "Hang Tag Design 3" }
+  ]
+};
+
+function showProductCategory(key, btnEl) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  btnEl.classList.add('active');
+
+  const gallery = document.getElementById('productGallery');
+  gallery.innerHTML = '';
+
+  productImages[key].forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `<img src="${item.src}" alt="${item.alt}">`;
+    gallery.appendChild(div);
+  });
+}
+
+// Load default category (woven) on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const firstBtn = document.querySelector('.tab-btn');
+  if (firstBtn) showProductCategory('woven', firstBtn);
+});

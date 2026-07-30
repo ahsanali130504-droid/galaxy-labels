@@ -211,47 +211,23 @@
 </div>
 
 <!-- PRODUCTS -->
+<!-- PRODUCTS -->
 <section class="products" id="products">
   <span class="tag-label center">Our Range</span>
   <h2 class="section-title">Product Categories</h2>
 
-  <div class="product-grid">
-
-    <a href="product-woven.html" class="product-card">
-      <img src="images/slide1.jpg" alt="Woven Labels">
-      <div class="card-overlay">
-        <h3>Woven Labels</h3>
-        <span class="view-link">View Collection →</span>
-      </div>
-    </a>
-
-    <a href="product-printed.html" class="product-card">
-      <img src="images/slide3.avif" alt="Satin Print Labels">
-      <div class="card-overlay">
-        <h3>Satin Print Labels</h3>
-        <span class="view-link">View Collection →</span>
-      </div>
-    </a>
-
-    <a href="product-hangtags.html" class="product-card">
-      <img src="images/slide5.jpg" alt="Hang Tags">
-      <div class="card-overlay">
-        <h3>Hang Tags</h3>
-        <span class="view-link">View Collection →</span>
-      </div>
-    </a>
-
-    <a href="product-badges.html" class="product-card">
-      <img src="images/slide4.jpg" alt="Woven Badges">
-      <div class="card-overlay">
-        <h3>Woven Badges</h3>
-        <span class="view-link">View Collection →</span>
-      </div>
-    </a>
-
-  </div>
+<div class="product-tabs">
+  <button class="tab-btn active" onclick="showProductCategory('woven', this)">Woven Labels</button>
+  <button class="tab-btn" onclick="showProductCategory('badges', this)">Woven Badges</button>
+  <button class="tab-btn" onclick="showProductCategory('lasercut', this)">Laser Cut Labels</button>
+  <button class="tab-btn" onclick="showProductCategory('damask', this)">Damask Labels</button>
+  <button class="tab-btn" onclick="showProductCategory('satin', this)">Satin Labels</button>
+  <button class="tab-btn" onclick="showProductCategory('taffeta', this)">Taffeta Labels</button>
+  <button class="tab-btn" onclick="showProductCategory('zipper', this)">Zipper Pullers</button>
+  <button class="tab-btn" onclick="showProductCategory('hangtags', this)">Hang Tags</button>
+</div>
+  <div class="product-gallery" id="productGallery"></div>
 </section>
-
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
