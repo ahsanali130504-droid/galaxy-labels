@@ -225,3 +225,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const firstBtn = document.querySelector('.tab-btn');
   if (firstBtn) showProductCategory('woven', firstBtn);
 });
+// ===== PRODUCT DROPDOWN NAVIGATION =====
+function goToProduct(key) {
+  const btn = document.querySelector(`.tab-btn[data-key="${key}"]`);
+  if (btn) {
+    showProductCategory(key, btn);
+  }
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+
+  // Close mobile menu if open
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileNav) mobileNav.classList.remove('active');
+}
+
+// ===== MOBILE ACCORDION TOGGLE =====
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+
+  // Close all other accordions
+  document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.accordion-toggle').forEach(el => el.classList.remove('open'));
+
+  if (!isOpen) {
+    content.classList.add('open');
+    btn.classList.add('open');
+  }
+}

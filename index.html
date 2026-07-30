@@ -16,21 +16,43 @@
 
     <nav class="nav-side nav-left" id="navLeft">
       <a href="#home">Home</a>
-      <a href="#products">Products</a>
+
+      <div class="nav-dropdown">
+        <a href="#products" class="dropdown-toggle">Products</a>
+        <div class="dropdown-menu">
+          <a href="#products" onclick="goToProduct('woven')">Woven Labels</a>
+          <a href="#products" onclick="goToProduct('badges')">Woven Badges</a>
+          <a href="#products" onclick="goToProduct('lasercut')">Laser Cut Labels</a>
+          <a href="#products" onclick="goToProduct('damask')">Damask Labels</a>
+          <a href="#products" onclick="goToProduct('satin')">Satin Labels</a>
+          <a href="#products" onclick="goToProduct('taffeta')">Taffeta Labels</a>
+          <a href="#products" onclick="goToProduct('zipper')">Zipper Pullers</a>
+          <a href="#products" onclick="goToProduct('hangtags')">Hang Tags</a>
+        </div>
+      </div>
     </nav>
 
-  <a href="index.html" class="logo">
-  <div class="logo-row">
-    <span class="logo-text logo-left">GALAXY</span>
-    <img src="images/logo.jpg.png" alt="Galaxy Labels Logo">
-    <span class="logo-text logo-right">LABELS</span>
-  </div>
-  <span class="logo-suffix">Pvt Ltd.</span>
-</a>
+    <a href="index.html" class="logo">
+      <div class="logo-row">
+        <span class="logo-text logo-left">GALAXY</span>
+        <img src="images/logo.jpg.png" alt="Galaxy Labels Logo">
+        <span class="logo-text logo-right">LABELS</span>
+      </div>
+      <span class="logo-suffix">Pvt Ltd.</span>
+    </a>
 
     <nav class="nav-side nav-right" id="navRight">
-      <a href="#about">Who We Are</a>
       <a href="#facility">Facility</a>
+
+      <div class="nav-dropdown">
+        <a href="#about" class="dropdown-toggle">About</a>
+        <div class="dropdown-menu">
+          <a href="#about">Who We Are</a>
+          <a href="#ceo">CEO Message</a>
+          <a href="#blog">Blog</a>
+        </div>
+      </div>
+
       <a href="#contact">Contact Us</a>
     </nav>
 
@@ -40,15 +62,37 @@
 
     <nav class="mobile-nav" id="mobileNav">
       <a href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#about">Who We Are</a>
+
+      <div class="mobile-accordion">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">Products <span class="arrow">▾</span></button>
+        <div class="accordion-content">
+          <a href="#products" onclick="goToProduct('woven')">Woven Labels</a>
+          <a href="#products" onclick="goToProduct('badges')">Woven Badges</a>
+          <a href="#products" onclick="goToProduct('lasercut')">Laser Cut Labels</a>
+          <a href="#products" onclick="goToProduct('damask')">Damask Labels</a>
+          <a href="#products" onclick="goToProduct('satin')">Satin Labels</a>
+          <a href="#products" onclick="goToProduct('taffeta')">Taffeta Labels</a>
+          <a href="#products" onclick="goToProduct('zipper')">Zipper Pullers</a>
+          <a href="#products" onclick="goToProduct('hangtags')">Hang Tags</a>
+        </div>
+      </div>
+
       <a href="#facility">Facility</a>
+
+      <div class="mobile-accordion">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">About <span class="arrow">▾</span></button>
+        <div class="accordion-content">
+          <a href="#about">Who We Are</a>
+          <a href="#ceo">CEO Message</a>
+          <a href="#blog">Blog</a>
+        </div>
+      </div>
+
       <a href="#contact">Contact Us</a>
     </nav>
 
   </div>
 </header>
-
 <!-- HERO SLIDER -->
 <section class="hero" id="home">
   <div class="slider" id="slider">
@@ -217,16 +261,38 @@
   <h2 class="section-title">Product Categories</h2>
 
 <div class="product-tabs">
-  <button class="tab-btn active" onclick="showProductCategory('woven', this)">Woven Labels</button>
-  <button class="tab-btn" onclick="showProductCategory('badges', this)">Woven Badges</button>
-  <button class="tab-btn" onclick="showProductCategory('lasercut', this)">Laser Cut Labels</button>
-  <button class="tab-btn" onclick="showProductCategory('damask', this)">Damask Labels</button>
-  <button class="tab-btn" onclick="showProductCategory('satin', this)">Satin Labels</button>
-  <button class="tab-btn" onclick="showProductCategory('taffeta', this)">Taffeta Labels</button>
-  <button class="tab-btn" onclick="showProductCategory('zipper', this)">Zipper Pullers</button>
-  <button class="tab-btn" onclick="showProductCategory('hangtags', this)">Hang Tags</button>
+  <button class="tab-btn active" data-key="woven" onclick="showProductCategory('woven', this)">Woven Labels</button>
+  <button class="tab-btn" data-key="badges" onclick="showProductCategory('badges', this)">Woven Badges</button>
+  <button class="tab-btn" data-key="lasercut" onclick="showProductCategory('lasercut', this)">Laser Cut Labels</button>
+  <button class="tab-btn" data-key="damask" onclick="showProductCategory('damask', this)">Damask Labels</button>
+  <button class="tab-btn" data-key="satin" onclick="showProductCategory('satin', this)">Satin Labels</button>
+  <button class="tab-btn" data-key="taffeta" onclick="showProductCategory('taffeta', this)">Taffeta Labels</button>
+  <button class="tab-btn" data-key="zipper" onclick="showProductCategory('zipper', this)">Zipper Pullers</button>
+  <button class="tab-btn" data-key="hangtags" onclick="showProductCategory('hangtags', this)">Hang Tags</button>
 </div>
   <div class="product-gallery" id="productGallery"></div>
+</section>
+<!-- CEO MESSAGE -->
+<section class="ceo-message" id="ceo">
+  <div class="ceo-inner">
+
+  <div class="ceo-content">
+    <h2 class="ceo-tag">A Message From Our CEO</h2>
+
+    <div class="ceo-image">
+      <img src="images/ceo.jpeg" alt="Muhammad Saeed - CEO">
+    </div>
+
+    <h3 class="ceo-quote">"Every label we make carries our name — so it has to carry our best work too."</h3>
+    <p>When we started Galaxy Labels, our goal was simple: build a company that brands could trust with the smallest, most detailed part of their product. A label may be small, but it says a lot about the quality behind it.</p>
+    <p>We treat every order — big or small — with the same level of care and attention. That commitment to precision and consistency is what we want every client to feel when they work with us.</p>
+    <div class="ceo-signature">
+      <span class="ceo-name">Muhammad Saeed</span>
+      <span class="ceo-title">Founder & CEO, Galaxy Labels Pvt Ltd.</span>
+    </div>
+  </div>
+
+</div>
 </section>
 <!-- CONTACT -->
 <section class="contact" id="contact">
