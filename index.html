@@ -180,60 +180,33 @@
 
   <div class="facility-grid">
 
-    <div class="machine-card">
+    <div class="machine-card" onclick="openMachineModal('weaving')">
       <img src="images/m1.jpg" alt="Weaving Loom">
-      <div class="machine-overlay">
-        <h3>Weaving Loom</h3>
-        <ul>
-          <li>Jacquard weaving technology</li>
-          <li>High-speed, precision thread control</li>
-          <li>Sharp, consistent woven detail</li>
-          <li>Ideal for logos, badges & tags</li>
-        </ul>
-      </div>
     </div>
 
-    <div class="machine-card">
+    <div class="machine-card" onclick="openMachineModal('cutting')">
       <img src="images/m2.jpg" alt="Label Cutting & Folding Machine">
-      <div class="machine-overlay">
-        <h3>Cutting & Folding Unit</h3>
-        <ul>
-          <li>Automated multi-roll cutting</li>
-          <li>Clean, uniform edge finishing</li>
-          <li>Precision fold for tags & care labels</li>
-          <li>High-volume daily output</li>
-        </ul>
-      </div>
     </div>
 
-    <div class="machine-card">
+    <div class="machine-card" onclick="openMachineModal('heatpress')">
       <img src="images/m3.jpeg" alt="Heat Press Machine">
-      <div class="machine-overlay">
-        <h3>Heat Press Station</h3>
-        <ul>
-          <li>Digital temperature control</li>
-          <li>Even heat distribution for clean seals</li>
-          <li>Used for tags, patches & badges</li>
-          <li>Consistent, wrinkle-free finish</li>
-        </ul>
-      </div>
     </div>
 
-    <div class="machine-card">
+    <div class="machine-card" onclick="openMachineModal('printing')">
       <img src="images/m4.jpg" alt="Flexo Printing Machine">
-      <div class="machine-overlay">
-        <h3>Flexo Printing Machine</h3>
-        <ul>
-          <li>Multi-color print stations</li>
-          <li>Sharp, vibrant satin printing</li>
-          <li>Fast roll-to-roll production</li>
-          <li>Consistent color accuracy</li>
-        </ul>
-      </div>
     </div>
 
   </div>
 </section>
+
+<!-- MACHINE DETAIL MODAL -->
+<div class="machine-modal" id="machineModal">
+  <div class="machine-modal-content">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <!-- PRODUCTS -->
 <section class="products" id="products">
   <span class="tag-label center">Our Range</span>
