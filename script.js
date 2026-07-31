@@ -3,7 +3,6 @@ const slides = document.querySelectorAll('.slide');
 const dotsContainer = document.getElementById('sliderDots');
 let currentSlide = 0;
 
-// Create dots dynamically based on number of slides
 slides.forEach((_, i) => {
   const dot = document.createElement('div');
   dot.classList.add('dot');
@@ -17,9 +16,7 @@ const dots = document.querySelectorAll('.dot');
 function goToSlide(index) {
   slides[currentSlide].classList.remove('active');
   dots[currentSlide].classList.remove('active');
-
   currentSlide = index;
-
   slides[currentSlide].classList.add('active');
   dots[currentSlide].classList.add('active');
 }
@@ -29,7 +26,6 @@ function nextSlide() {
   goToSlide(next);
 }
 
-// Auto-change slide every 5 seconds
 let slideInterval = setInterval(nextSlide, 5000);
 
 // ===== MOBILE MENU =====
@@ -41,22 +37,20 @@ hamburger.addEventListener('click', (e) => {
   mobileNav.classList.toggle('active');
 });
 
-// Close mobile menu when a link is clicked
 document.querySelectorAll('.mobile-nav a').forEach(link => {
   link.addEventListener('click', () => {
     mobileNav.classList.remove('active');
   });
 });
 
-// Close mobile menu when clicking anywhere outside it
 document.addEventListener('click', (e) => {
   const isClickInsideNav = mobileNav.contains(e.target);
   const isClickOnHamburger = hamburger.contains(e.target);
-
   if (!isClickInsideNav && !isClickOnHamburger && mobileNav.classList.contains('active')) {
     mobileNav.classList.remove('active');
   }
 });
+
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
 
@@ -67,11 +61,103 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
   }
 });
+
+// ===== PRODUCT CATEGORY TABS =====
+const productImages = {
+  woven: [
+    { src: "images/slide1.jpg", alt: "Woven Label Design 1" },
+    { src: "images/sl1.jpg", alt: "Woven Label Design 2" },
+    { src: "images/sli2.jpg", alt: "Woven Label Design 3" }
+  ],
+  badges: [
+    { src: "images/slide4.jpg", alt: "Woven Badge Design 1" },
+    { src: "images/sli4.jpg", alt: "Woven Badge Design 2" },
+    { src: "images/slide3.avif", alt: "Woven Badge Design 3" }
+  ],
+  lasercut: [
+    { src: "images/sl1.jpg", alt: "Laser Cut Label Design 1" },
+    { src: "images/slide1.jpg", alt: "Laser Cut Label Design 2" },
+    { src: "images/sli2.jpg", alt: "Laser Cut Label Design 3" }
+  ],
+  damask: [
+    { src: "images/slide3.avif", alt: "Damask Label Design 1" },
+    { src: "images/sl3.avif", alt: "Damask Label Design 2" },
+    { src: "images/slide1.jpg", alt: "Damask Label Design 3" }
+  ],
+  satin: [
+    { src: "images/slide3.avif", alt: "Satin Label Design 1" },
+    { src: "images/sl3.avif", alt: "Satin Label Design 2" },
+    { src: "images/sli4.jpg", alt: "Satin Label Design 3" }
+  ],
+  taffeta: [
+    { src: "images/sli4.jpg", alt: "Taffeta Label Design 1" },
+    { src: "images/slide4.jpg", alt: "Taffeta Label Design 2" },
+    { src: "images/sl3.avif", alt: "Taffeta Label Design 3" }
+  ],
+  zipper: [
+    { src: "images/slide4.jpg", alt: "Zipper Puller Design 1" },
+    { src: "images/sli4.jpg", alt: "Zipper Puller Design 2" },
+    { src: "images/slide1.jpg", alt: "Zipper Puller Design 3" }
+  ],
+  hangtags: [
+    { src: "images/slide5.jpg", alt: "Hang Tag Design 1" },
+    { src: "images/sli5.jpg", alt: "Hang Tag Design 2" },
+    { src: "images/slide1.jpg", alt: "Hang Tag Design 3" }
+  ]
+};
+
+function showProductCategory(key, btnEl) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  btnEl.classList.add('active');
+
+  const gallery = document.getElementById('productGallery');
+  gallery.innerHTML = '';
+
+  productImages[key].forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `<img src="${item.src}" alt="${item.alt}">`;
+    gallery.appendChild(div);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const firstBtn = document.querySelector('.tab-btn');
+  if (firstBtn) showProductCategory('woven', firstBtn);
+});
+
+function goToProduct(key) {
+  const btn = document.querySelector(`.tab-btn[data-key="${key}"]`);
+  if (btn) {
+    showProductCategory(key, btn);
+  }
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+
+  const mNav = document.getElementById('mobileNav');
+  if (mNav) mNav.classList.remove('active');
+}
+
+// ===== MOBILE ACCORDION TOGGLE =====
+function toggleAccordion(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+
+  document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.accordion-toggle').forEach(el => el.classList.remove('open'));
+
+  if (!isOpen) {
+    content.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+
 // ===== MACHINE MODAL =====
 const machineData = {
   weaving: {
+    video: "videos/m1.mp4",
     img: "images/m1.jpg",
     title: "Weaving Loom",
+    learnMore: "machine-weaving.html",
     body: `
       <h4>What It Does</h4>
       <p>This machine weaves your design directly into the fabric using thin threads, one line at a time. Nothing is printed here — every letter, logo and pattern is actually built out of thread, just like fabric is woven.</p>
@@ -86,8 +172,10 @@ const machineData = {
     `
   },
   cutting: {
+    video: "videos/m2.mp4",
     img: "images/m2.jpg",
     title: "Cutting & Folding Unit",
+    learnMore: "machine-cutting.html",
     body: `
       <h4>What It Does</h4>
       <p>After labels are woven or printed, they come out as one long continuous roll. This machine's job is to cut that roll into individual labels and fold each one into the exact shape needed.</p>
@@ -102,8 +190,10 @@ const machineData = {
     `
   },
   heatpress: {
+    video: "videos/m3.mp4",
     img: "images/m3.jpeg",
     title: "Heat Press Station",
+    learnMore: "machine-heatpress.html",
     body: `
       <h4>What It Does</h4>
       <p>This machine uses heat and pressure to seal and finish labels, tags, and badges. Think of it like an iron, but much more precise and controlled digitally.</p>
@@ -118,8 +208,10 @@ const machineData = {
     `
   },
   printing: {
+    video: "videos/m4.mp4",
     img: "images/m4.jpg",
     title: "Flexo Printing Machine",
+    learnMore: "machine-printing.html",
     body: `
       <h4>What It Does</h4>
       <p>This machine prints your design onto satin, taffeta, or fabric tape using a technique called flexographic printing — where a flexible printing plate transfers ink directly onto the material.</p>
@@ -140,14 +232,14 @@ function openMachineModal(key) {
   if (!data) return;
 
   document.getElementById('modalBody').innerHTML = `
-    <img src="${data.img}" alt="${data.title}">
+    <video src="${data.video}" poster="${data.img}" controls playsinline></video>
     <h2>${data.title}</h2>
     ${data.body}
+    <a href="${data.learnMore}" class="learn-more-btn">Learn More</a>
   `;
   document.getElementById('machineModal').classList.add('active');
 }
 
-// Close modal
 const machineModal = document.getElementById('machineModal');
 const modalClose = document.getElementById('modalClose');
 
@@ -155,100 +247,8 @@ modalClose.addEventListener('click', () => {
   machineModal.classList.remove('active');
 });
 
-// Close when clicking outside the card (on the dark overlay)
 machineModal.addEventListener('click', (e) => {
   if (e.target === machineModal) {
     machineModal.classList.remove('active');
   }
 });
-// ===== PRODUCT CATEGORY TABS =====
-const productImages = {
-  woven: [
-    { src: "images/sl1.jpg", alt: "Woven Label Design 1" },
-    { src: "images/sl3.avif", alt: "Woven Label Design 2" },
-    { src: "images/sli2.jpg", alt: "Woven Label Design 3" }
-  ],
-  badges: [
-    { src: "images/sli4.jpg", alt: "Woven Badge Design 1" },
-    { src: "images/sli5.jpg", alt: "Woven Badge Design 2" },
-    { src: "images/sl3.avif", alt: "Woven Badge Design 3" }
-  ],
-  lasercut: [
-    { src: "images/sl1.jpg", alt: "Laser Cut Label Design 1" },
-    { src: "images/sl3.avif", alt: "Laser Cut Label Design 2" },
-    { src: "images/sli2.jpg", alt: "Laser Cut Label Design 3" }
-  ],
-  damask: [
-    { src: "images/sl3.avif", alt: "Damask Label Design 1" },
-    { src: "images/sli4.jpg", alt: "Damask Label Design 2" },
-    { src: "images/sl1.jpg", alt: "Damask Label Design 3" }
-  ],
-  satin: [
-    { src: "images/sl3.avif", alt: "Satin Label Design 1" },
-    { src: "images/sli5.jpg", alt: "Satin Label Design 2" },
-    { src: "images/sli4.jpg", alt: "Satin Label Design 3" }
-  ],
-  taffeta: [
-    { src: "images/sli4.jpg", alt: "Taffeta Label Design 1" },
-    { src: "images/sli5.jpg", alt: "Taffeta Label Design 2" },
-    { src: "images/sl3.avif", alt: "Taffeta Label Design 3" }
-  ],
-  zipper: [
-    { src: "images/sli4.jpg", alt: "Zipper Puller Design 1" },
-    { src: "images/sli5.jpg", alt: "Zipper Puller Design 2" },
-    { src: "images/sl1.jpg", alt: "Zipper Puller Design 3" }
-  ],
-  hangtags: [
-    { src: "images/sli5.jpg", alt: "Hang Tag Design 1" },
-    { src: "images/sli4.jpg", alt: "Hang Tag Design 2" },
-    { src: "images/sl1.jpg", alt: "Hang Tag Design 3" }
-  ]
-};
-
-function showProductCategory(key, btnEl) {
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  btnEl.classList.add('active');
-
-  const gallery = document.getElementById('productGallery');
-  gallery.innerHTML = '';
-
-  productImages[key].forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.innerHTML = `<img src="${item.src}" alt="${item.alt}">`;
-    gallery.appendChild(div);
-  });
-}
-
-// Load default category (woven) on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const firstBtn = document.querySelector('.tab-btn');
-  if (firstBtn) showProductCategory('woven', firstBtn);
-});
-// ===== PRODUCT DROPDOWN NAVIGATION =====
-function goToProduct(key) {
-  const btn = document.querySelector(`.tab-btn[data-key="${key}"]`);
-  if (btn) {
-    showProductCategory(key, btn);
-  }
-  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-
-  // Close mobile menu if open
-  const mobileNav = document.getElementById('mobileNav');
-  if (mobileNav) mobileNav.classList.remove('active');
-}
-
-// ===== MOBILE ACCORDION TOGGLE =====
-function toggleAccordion(btn) {
-  const content = btn.nextElementSibling;
-  const isOpen = content.classList.contains('open');
-
-  // Close all other accordions
-  document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
-  document.querySelectorAll('.accordion-toggle').forEach(el => el.classList.remove('open'));
-
-  if (!isOpen) {
-    content.classList.add('open');
-    btn.classList.add('open');
-  }
-}
